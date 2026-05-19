@@ -1,9 +1,13 @@
 from pyrogram import Client
 from vars import BOT_TOKEN
 
-# क्लाइंट को इनिशियलाइज़ करें
-app = Client("my_bot", bot_token=BOT_TOKEN)
+# API_ID और HASH को None रखें ताकि सिर्फ टोकन का उपयोग हो
+app = Client(
+    "my_bot",
+    api_id=None,
+    api_hash=None,
+    bot_token=BOT_TOKEN
+)
 
-# यह Pyrogram का अपना तरीका है बोट को चलाने का
-print("बोट लाइव हो रहा है...")
+print("बोट शुरू हो रहा है...")
 app.run()
