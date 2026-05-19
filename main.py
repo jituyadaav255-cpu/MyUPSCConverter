@@ -1,13 +1,10 @@
+import os
 from pyrogram import Client
-from vars import BOT_TOKEN
 
-# API_ID और HASH को None रखें ताकि सिर्फ टोकन का उपयोग हो
-app = Client(
-    "my_bot",
-    api_id=None,
-    api_hash=None,
-    bot_token=BOT_TOKEN
-)
+# यहाँ से टोकन सीधे Railway के Variables से उठाएगा
+BOT_TOKEN = os.environ.get("BOT_TOKEN")
 
-print("बोट शुरू हो रहा है...")
+app = Client("my_bot", bot_token=BOT_TOKEN)
+
+print("बोट लाइव हो रहा है...")
 app.run()
