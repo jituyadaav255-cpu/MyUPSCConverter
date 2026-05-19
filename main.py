@@ -1,8 +1,8 @@
 from pyrogram import Client
 from vars import BOT_TOKEN
 
-# "bot_session" नाम का एक नया सेशन बनाएं
-app = Client("bot_session", bot_token=BOT_TOKEN)
+# "my_bot_final" नाम का बिल्कुल नया सेशन बनाएगा
+app = Client("my_bot_final", bot_token=BOT_TOKEN)
 
-print("बोट लाइव है!")
+print("बोट शुरू हो रहा है...")
 app.run()
