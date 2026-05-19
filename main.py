@@ -1,23 +1,28 @@
-import asyncio
-import nest_asyncio
 import sys
+import asyncio
 
-# Event loop को फिक्स करने का सबसे पावरफुल तरीका
-if sys.version_info >= (3, 8):
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy() if sys.platform == 'win32' else asyncio.DefaultEventLoopPolicy())
+# यह जुगाड़ 3.14 के सख्त timeout नियमों को बाईपास करेगा
+if sys.version_info >= (3, 11):
+    def run_wrapper(coro):
+        return asyncio.run(coro)
+else:
+    def run_wrapper(coro):
+        loop = asyncio.get_event_loop()
+        return loop.run_until_complete(coro)
 
-nest_asyncio.apply()
-
+# अब Pyrogram को इम्पोर्ट करें
 from pyrogram import Client
 from vars import API_ID, API_HASH, BOT_TOKEN
 
 app = Client("my_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
 
-async def main():
+async def start_bot():
     await app.start()
-    print("बोट सफलता के साथ लाइव हो गया है!")
-    await asyncio.Event().wait()
+    print("बोट लाइव है!")
+    await asyncio.Future()
 
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(main())
+    try:
+        run_wrapper(start_bot())
+    except Exception as e:
+        print(f"एरर: {e}")
