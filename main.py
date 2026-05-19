@@ -1,8 +1,8 @@
 from pyrogram import Client
 from vars import BOT_TOKEN
 
-# "my_bot_final" नाम का बिल्कुल नया सेशन बनाएगा
-app = Client("my_bot_final", bot_token=BOT_TOKEN)
+# ":memory:" का मतलब है कि कोई भी पुरानी .session फाइल इस्तेमाल नहीं होगी
+app = Client(":memory:", bot_token=BOT_TOKEN)
 
-print("बोट शुरू हो रहा है...")
+print("बोट लाइव है!")
 app.run()
